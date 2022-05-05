@@ -1,11 +1,10 @@
 <template>
 <!--     老师给的组件样式       -->
-        <div id="hy-swiper">
+    <div id="hy-swiper">
       <div class="swiper" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
         <slot></slot>
       </div>
-      <slot name="indicator">
-      </slot>
+      <slot name="indicator"></slot>
       <div class="indicator">
         <slot name="indicator" v-if="showIndicator && slideCount>1">
           <div v-for="(item, index) in slideCount" class="indi-item" :class="{active: index === currentIndex-1}" :key="index"></div>
@@ -124,6 +123,8 @@
         let swiperEl = document.querySelector('.swiper');
         let slidesEls = swiperEl.getElementsByClassName('slide');
 
+        console.log(slidesEls);
+
         // 2.保存个数
         this.slideCount = slidesEls.length;
 
@@ -131,6 +132,9 @@
         if (this.slideCount > 1) {
           let cloneFirst = slidesEls[0].cloneNode(true);
           let cloneLast = slidesEls[this.slideCount - 1].cloneNode(true);
+
+          // swiperEl.appendChild(cloneLast);
+          // swiperEl.appendChild(cloneFirst);
           swiperEl.insertBefore(cloneLast, slidesEls[0]);
           swiperEl.appendChild(cloneFirst);
           this.totalWidth = swiperEl.offsetWidth;

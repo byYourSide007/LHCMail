@@ -1,5 +1,5 @@
 <template>
-  <swiper-comps ref="swiper" v-if="banners.length">
+  <swiper-comps ref="swiper" v-if="banners.length" >
     <swiper-item  v-for="(item,index) in banners" :key="index">
        <a :href="item.link"><img :src="item.image" :alt="item.title"></a>
     </swiper-item>
@@ -13,7 +13,6 @@
     props : {
       banners : {
         type : Array,
-        // default: []
         default() {
           return [];
         }
@@ -37,5 +36,7 @@
 </script>
 
 <style scoped>
-
+    /*.swiper {*/
+    /*    padding-top: 44px;*/
+    /*}*/
 </style>

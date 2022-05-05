@@ -8,6 +8,8 @@
           <home-swiper :banners="banners" ref="hSwiper"/>
       <!--    推荐商品展示    -->
           <recommend-view :recommends="recommend"></recommend-view>
+      <!--    商品特色  -->
+          <feature-view></feature-view>
 
   </div>
 </template>
@@ -18,6 +20,8 @@ import NavBar from "@/components/common/navbar/NavBar";
 import NavBarItem from "@/components/common/navbar/NavBarItem";
 import HomeSwiper from "./childComps/HomeSwiper";
 import RecommendView from "@/views/home/childComps/RecommendView";
+import FeatureView from "@/views/home/childComps/FeatureView";
+
 import {getHomeMUltidata} from "@/network/home";
 
 export default {
@@ -34,6 +38,7 @@ export default {
     NavBarItem,
     HomeSwiper,
     RecommendView,
+    FeatureView,
   },
   //当组件被成功创建之后
   created() {
@@ -48,8 +53,16 @@ export default {
 </script>
 
 <style scoped>
+    /*.home {*/
+    /*    !*padding-top: 44px;*!*/
+    /*}*/
   .home-nav {
     background-color: #fb7299;
     color: #fff;
+      /*position: fixed;*/
+      /*left: 0;*/
+      /*right: 0;*/
+      /*top: 0;*/
+      /*z-index: 999;*/
   }
 </style>
