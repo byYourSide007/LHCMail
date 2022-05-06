@@ -130,7 +130,7 @@ import FeatureView from "@/views/home/childComps/FeatureView";
 import TabControl from "@/components/common/tabControl/TabControl";
 
 
-import {getHomeMUltidata} from "@/network/home";
+import {getHomeMUltidata,getHomeGoods} from "@/network/home";
 
 export default {
   name: 'HomeView',
@@ -139,6 +139,11 @@ export default {
     return {
       banners : [],
       recommend : [],
+      goods : {
+        "pop" : {page : 0, list: []},
+        "new" : {page : 0, list: []},
+        "sell" : {page : 0, list: []},
+      },
     };
   },
   components: {
@@ -149,15 +154,35 @@ export default {
     FeatureView,
     TabControl,
   },
+  methods : {
+    getHomeMUltidata(){
+      //获取轮播图和推荐信息的数据
+      getHomeMUltidata().then(res => {
+        console.log(res);
+        this.banners = res.data.banner.list;
+        this.recommend = res.data.recommend.list;
+      });
+    },//getHomeMUltidata
+    getHomeGoods(type){
+      const page = this.goods[type].page + 1;//创建一个变量存储页数，才能动态请求数据
+      //请求商品数据
+      getHomeGoods(type,page).then(res => {
+        this.goods[type].list.push(...res.data.list);
+        this.goods[type].page += 1;
+        console.log(res);
+      })
+    },//getHomeGoods
+  },//methods
   //当组件被成功创建之后
   created() {
-    getHomeMUltidata().then(res => {
-      console.log(res);
+    //1.获取多个数据
+    this.getHomeMUltidata();//要记得使用this调用，如果不使用this，则使用的是上面import中的内容，而使用了this，调用的是本组件中的这个方法
+    //2.获取展示商品的数据
+    this.getHomeGoods('pop');
+    this.getHomeGoods('new');
+    this.getHomeGoods('sell');
+  },//created
 
-      this.banners = res.data.banner.list;
-      this.recommend = res.data.recommend.list;
-    });
-  }
 }
 </script>
 
@@ -176,6 +201,7 @@ export default {
       top: 0;
       z-index: 999;
   }
+    /*如果直接命名为tab-control的类，会导致相同类名的嵌套*/
     .tab-control-position {
         position: sticky;
         top: 44px;
