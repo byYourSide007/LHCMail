@@ -1,6 +1,6 @@
 <template>
 <!--     老师给的组件样式       -->
-    <div id="hy-swiper">
+    <div id="hy-swiper" >
       <div class="swiper" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
         <slot></slot>
       </div>
@@ -122,8 +122,6 @@
         // 1.获取要操作的元素
         let swiperEl = document.querySelector('.swiper');
         let slidesEls = swiperEl.getElementsByClassName('slide');
-
-        console.log(slidesEls);
 
         // 2.保存个数
         this.slideCount = slidesEls.length;

@@ -1,5 +1,6 @@
 <template>
-  <swiper-comps ref="swiper" v-if="banners.length" >
+<!--  <swiper-comps  v-if="banners.length" class="swiper-comps">-->
+  <swiper-comps  v-if="banners.length">
     <swiper-item  v-for="(item,index) in banners" :key="index">
        <a :href="item.link"><img :src="item.image" :alt="item.title"></a>
     </swiper-item>
@@ -36,7 +37,7 @@
 </script>
 
 <style scoped>
-    /*.swiper {*/
+    /*.swiper-comps {*/
     /*    padding-top: 44px;*/
     /*}*/
 </style>
