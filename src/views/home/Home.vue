@@ -11,7 +11,9 @@
       <!--    商品特色  -->
           <feature-view></feature-view>
       <!--    显示栏  -->
-          <tab-control :title="['流行','新款','精选']" class="tab-control-position"></tab-control>
+          <tab-control :title="['流行','新款','精选']" class="tab-control-position" @tabClick="tabClick"></tab-control>
+      <!--    商品展示    -->
+          <goods-list :goods="showGoods"></goods-list>
 
       <ul>
           <li>列表1</li>
@@ -122,13 +124,12 @@
 // <!-- 可以将导入的组件分成几个部分，（1）导入的方法。（2）子组件。（3）公共组件。（4）导入的数据。-->
 import NavBar from "@/components/common/navbar/NavBar";
 import NavBarItem from "@/components/common/navbar/NavBarItem";
-
+import TabControl from "@/components/common/tabControl/TabControl";
+import GoodsList from "@/components/content/goods/GoodsList";
 
 import HomeSwiper from "./childComps/HomeSwiper";
 import RecommendView from "@/views/home/childComps/RecommendView";
 import FeatureView from "@/views/home/childComps/FeatureView";
-import TabControl from "@/components/common/tabControl/TabControl";
-
 
 import {getHomeMUltidata,getHomeGoods} from "@/network/home";
 
@@ -144,21 +145,47 @@ export default {
         "new" : {page : 0, list: []},
         "sell" : {page : 0, list: []},
       },
+      currentType : 'pop',/*第一次展示的数据是流行类别*/
     };
   },
   components: {
     NavBar,
     NavBarItem,
+    TabControl,
+    GoodsList,
     HomeSwiper,
     RecommendView,
     FeatureView,
-    TabControl,
+  },
+  computed : {
+    showGoods(){
+      return this.goods[this.currentType].list
+    }
   },
   methods : {
+    /**
+     * 事件监听相关的方法
+     * */
+    tabClick(index){
+      switch (index) {
+        case 0 :
+          this.currentType = 'pop' ;
+          break;
+        case 1 :
+          this.currentType = 'new';
+          break;
+        case 2 :
+          this.currentType = 'sell';
+          break;
+      }
+    },
+
+    /**
+     * 网络请求相关的方法
+     * */
     getHomeMUltidata(){
       //获取轮播图和推荐信息的数据
       getHomeMUltidata().then(res => {
-        console.log(res);
         this.banners = res.data.banner.list;
         this.recommend = res.data.recommend.list;
       });
@@ -169,7 +196,6 @@ export default {
       getHomeGoods(type,page).then(res => {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
-        console.log(res);
       })
     },//getHomeGoods
   },//methods
@@ -191,7 +217,6 @@ export default {
     .home {
         padding-top: 44px;
     }
-
   .home-nav {
     background-color: #fb7299;
     color: #fff;
@@ -205,5 +230,6 @@ export default {
     .tab-control-position {
         position: sticky;
         top: 44px;
+        z-index: 9;/*当上拉商品列表的时候，防止标题会被挡住*/
     }
 </style>
