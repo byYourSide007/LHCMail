@@ -105,7 +105,7 @@ export default {
     },
     loadMore(){
       this.getHomeGoods(this.currentType);
-
+      this.$refs.scroll.scroll.refresh();
     },
     /**
      * 网络请求相关的方法
