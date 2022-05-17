@@ -1,6 +1,6 @@
 <template>
     <div class="goods-item">
-        <img :src="goodsItem.show.img">
+        <img :src="goodsItem.show.img" @load="imageLoad">
         <div class="goods-info">
             <p>{{goodsItem.title}}</p>
             <span class="price">￥{{goodsItem.price}}</span>
@@ -19,6 +19,13 @@
           return {};
         }
       }
+    },
+    methods : {
+      //当加载完成之后，调用这个函数，将这个方法传递到主页中，也就是home.vue组件中
+      imageLoad(){
+        //使用vuex 方式
+        this.$store.commit('goodsImageLoad');
+      },
     }
   }
 </script>

@@ -44,6 +44,8 @@ import FeatureView from "@/views/home/childComps/FeatureView";
 
 import {getHomeMUltidata,getHomeGoods} from "@/network/home";
 
+
+
 export default {
   name: 'HomeView',
   data(){
@@ -104,8 +106,12 @@ export default {
       this.showBackTop = (position.y < -1000);/*在此处应该注意是y值，而不是直接使用position*/
     },
     loadMore(){
+      //继续加载首页中的商品数据
       this.getHomeGoods(this.currentType);
-      this.$refs.scroll.scroll.refresh();
+
+      //在这里直接使用refresh也是能够满足需求的，但组件通信相关的内容还是需要学习
+      // this.$refs.scroll.scroll.refresh();
+
     },
     /**
      * 网络请求相关的方法
@@ -137,10 +143,16 @@ export default {
     this.getHomeGoods('pop');
     this.getHomeGoods('new');
     this.getHomeGoods('sell');
+
+    // 3.监听item中图片加载完成,下面的方法事vue2中的方法
+    // this.$bus.on('imageLoad',() => {
+    //   console.log('图片加载完成');
+    // });
   },//created
   mounted() {
-
-    },//mounted
+    //使用vuex方式进行监听图片加载的状态
+    this.$store.state.home.loadImg = this.$refs.scroll.scroll
+  },//mounted
 }
 </script>
 
