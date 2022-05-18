@@ -44,6 +44,8 @@ import FeatureView from "@/views/home/childComps/FeatureView";
 
 import {getHomeMUltidata,getHomeGoods} from "@/network/home";
 
+import {debounce} from '@/common/utils'
+
 
 
 export default {
@@ -76,6 +78,10 @@ export default {
   computed : {
     showGoods(){
       return this.goods[this.currentType].list
+    },
+    //用于触发加载图片刷新列表高度
+    loadMoreImg(){
+      return this.$store.state.home.isLoad;
     }
   },
   methods : {
@@ -108,10 +114,6 @@ export default {
     loadMore(){
       //继续加载首页中的商品数据
       this.getHomeGoods(this.currentType);
-
-      //在这里直接使用refresh也是能够满足需求的，但组件通信相关的内容还是需要学习
-      // this.$refs.scroll.scroll.refresh();
-
     },
     /**
      * 网络请求相关的方法
@@ -129,11 +131,9 @@ export default {
       getHomeGoods(type,page).then(res => {
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
-
         this.$refs.scroll.scroll.finishPullUp();
       });
     },//getHomeGoods
-
   },//methods
   //当组件被成功创建之后
   created() {
@@ -150,9 +150,22 @@ export default {
     // });
   },//created
   mounted() {
-    //使用vuex方式进行监听图片加载的状态
-    this.$store.state.home.loadImg = this.$refs.scroll.scroll
+
+
   },//mounted
+  //监听全局事件
+  watch : {
+    //如果上拉加载更多
+    loadMoreImg(){
+      //使用防抖函数,因为将这个方法抽离到common中的utils中。因此不用使用this调用
+      // const refresh = this.debounce(this.$refs.scroll.scroll.refresh,200);/* 该组件有问题，更换调用其他的方法能够正常输出内容，不显示报错 */
+      // const refresh = this.debounce(this.getHomeMUltidata,200);/* 传入这个函数的时候，能够正常的运行 */
+      const refresh = debounce(this,200);/* 先满足这个防抖需求 */
+      refresh();
+      //如果不使用防抖函数
+      // this.$refs.scroll.scroll.refresh();
+    },
+  },
 }
 </script>
 

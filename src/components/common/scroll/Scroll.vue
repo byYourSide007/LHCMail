@@ -37,6 +37,8 @@
         probeType : this.probeType, /*只要是滚动，都检测*/
         pullUpLoad : this.pullUpLoad,/*可以设定上拉加载更多的事件*/
         click : true,
+        observeDOM : true,
+        observeImg : true,
       });
       this.scroll.on('scroll',position => {
         this.$emit('scroll',position);

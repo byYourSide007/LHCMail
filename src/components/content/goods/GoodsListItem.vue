@@ -26,7 +26,7 @@
         //使用vuex 方式
         this.$store.commit('goodsImageLoad');
       },
-    }
+    },
   }
 </script>
 
