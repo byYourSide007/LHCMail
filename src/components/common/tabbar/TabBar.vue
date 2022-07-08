@@ -24,12 +24,15 @@
         background-color: #f6f6f6;
 
         /*设置阴影，使得过度比较平滑*/
-        box-shadow: -10px 10px rgba(100,100,100,.3);
+        /*box-shadow: -10px 10px rgba(100,100,100,.3);*/
 
         /*        如果不设置left和right，在position设置fixed，会导致文本也无法正常显示    */
         left: 0;
         right: 0;
-        bottom: 0;
+
+        /*因为要牵扯到 个人中心中的复用问题，因此， 将置于底部的样式设置 转移到 MainTabBar 中去*/
+
+        /*bottom: 0;*/
     }
 
 </style>

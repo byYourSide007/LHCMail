@@ -1,5 +1,4 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import HomeView from '../views/home/Home.vue'
 
 const routes = [
   {
@@ -13,6 +12,7 @@ const routes = [
   {
     path: '/home',
     name: 'home',
+    // meta : {keepAlive : true},
     component: () => import('@/views/home/Home.vue')
   },
   {
@@ -29,6 +29,18 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: () => import('@/views/profile/profile')
+  },
+  {
+    path: '/details/:id',
+    name: 'details',
+    component: () => import('@/views/details/Details')
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: () => import('@/views/login/Login')
+    // component: () => import('@/views/details/Details')
+
   }
 
 ];

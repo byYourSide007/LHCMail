@@ -31,14 +31,14 @@
     },
     methods : {
       itemClick(){
-        // console.log('item');
-        this.$router.push(this.path)
+        // this.$store.state.currentRouter = this.path;/*为保存页面数据向仓库传入的数据*/
+        this.$router.push(this.path);
       },
   }
   }
 </script>
 
-<style>
+<style scoped>
     /*设置单个项目文件内容*/
     .tab-bar-item{
         flex: 1;
@@ -50,13 +50,13 @@
     }
 
     /*!*设置图片的样式*!*/
-    .tab-bar-item img {
-        height: 26px;
-        /*    将总体样式往下设置一点*/
-        margin-top: 3px;
-    /*    图片下面会有三个像素的富裕空间，可以设置下面的属性让其去除这三个像素的空间,让问题和图片更加的紧凑*/
-        vertical-align: middle;
-    }
+    /*.tab-bar-item img {*/
+    /*    height: 26px;*/
+    /*    !*    将总体样式往下设置一点*!*/
+    /*    margin-top: 3px;*/
+    /*!*    图片下面会有三个像素的富裕空间，可以设置下面的属性让其去除这三个像素的空间,让问题和图片更加的紧凑*!*/
+    /*    vertical-align: middle;*/
+    /*}*/
 
 
     /*.active {*/

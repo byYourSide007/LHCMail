@@ -2,7 +2,11 @@
 <!--  <swiper-comps  v-if="banners.length" class="swiper-comps">-->
   <swiper-comps  v-if="banners.length">
     <swiper-item  v-for="(item,index) in banners" :key="index">
-       <a :href="item.link"><img :src="item.image" :alt="item.title"></a>
+       <a :href="item.link">
+           <img :src="item.image"
+                :alt="item.title"
+                @load="imgLoad">
+       </a>
     </swiper-item>
     </swiper-comps>
 </template>
@@ -11,6 +15,11 @@
   import {SwiperComps,SwiperItem} from '@/components/common/swiper'
   export default {
     name: "HomeSwiper",
+    data(){
+      return {
+        isLoad : false,
+      }
+    },
     props : {
       banners : {
         type : Array,
@@ -27,11 +36,17 @@
         if (this.$refs.swiper) {
           this.$refs.swiper.startTimer()
         }
-      }
+      },
+      imgLoad(){
+        if (!this.isLoad){
+          this.$emit("swiperImageLoad");
+          this.isLoad = true;
+        }
+      },
     },
     components : {
       SwiperComps,
-      SwiperItem
+      SwiperItem,
     }
   }
 </script>

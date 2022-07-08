@@ -4,6 +4,12 @@
           <nav-bar class="home-nav">
               <nav-bar-item><template #center><div>购物街</div></template></nav-bar-item>
           </nav-bar>
+      <!--    显示栏  -->
+      <tab-control :title="['流行','新款','精选']"
+                   @tabClick="tabClick"
+                   ref="tabControl1"
+                   class="tabControl"
+                   v-show="isFixed"/>
 <!--      滚动条   -->
       <b-scroll class="content"
                 ref="scroll"
@@ -12,17 +18,18 @@
                 @pullingUp="loadMore"
                 :probe-type="3">
           <!--    轮播图     -->
-          <home-swiper :banners="banners" ref="hSwiper"/>
+          <home-swiper :banners="banners" ref="hSwiper" @swiperImageLoad="swiperImageLoad"/>
           <!--    推荐商品展示    -->
           <recommend-view :recommends="recommend"></recommend-view>
           <!--    商品特色  -->
           <feature-view></feature-view>
           <!--    显示栏  -->
-          <tab-control :title="['流行','新款','精选']" class="tab-control-position" @tabClick="tabClick"></tab-control>
+          <tab-control :title="['流行','新款','精选']"
+                       @tabClick="tabClick"
+                       ref="tabControl2"/>
 
           <!--    商品展示    -->
           <goods-list :goods="showGoods"></goods-list>
-
       </b-scroll>
 <!--      返回顶部  -->
       <back-top @click="backToTop" v-show="showBackTop" />
@@ -46,8 +53,6 @@ import {getHomeMUltidata,getHomeGoods} from "@/network/home";
 
 import {debounce} from '@/common/utils'
 
-
-
 export default {
   name: 'HomeView',
   data(){
@@ -62,6 +67,9 @@ export default {
       },
       currentType : 'pop',/*第一次展示的数据是流行类别*/
       showBackTop : false,
+      offsetTop : 0,
+      isFixed : false,
+      saveY: 0,//当切换界面的时候保存界面信息
     };
   },
   components: {
@@ -91,7 +99,7 @@ export default {
     tabClick(index){
       switch (index) {
         case 0 :
-          this.currentType = 'pop' ;
+          this.currentType = 'pop';
           break;
         case 1 :
           this.currentType = 'new';
@@ -100,6 +108,8 @@ export default {
           this.currentType = 'sell';
           break;
       }
+      this.$refs.tabControl1.currentIndex = index;
+      this.$refs.tabControl2.currentIndex = index;
     },
     backToTop(){
       // //没有封装的方法：先去拿这个组件（到this.$refs.scroll），然后拿到这个组件的属性（到this.$refs.scroll.scroll），然后调用所对应的方法（到this.$refs.scroll.scroll.scrollTo）
@@ -109,11 +119,17 @@ export default {
 
     },//backToTop
     contentScroll(position){
+      /*确定回到顶部在什么位置开始显示*/
       this.showBackTop = (position.y < -1000);/*在此处应该注意是y值，而不是直接使用position*/
+        //  确定是否让tabbar固定
+      this.isFixed = -position.y > this.offsetTop;
     },
     loadMore(){
       //继续加载首页中的商品数据
       this.getHomeGoods(this.currentType);
+    },
+    swiperImageLoad(){
+      this.offsetTop = this.$refs.tabControl2.$el.offsetTop;
     },
     /**
      * 网络请求相关的方法
@@ -149,8 +165,12 @@ export default {
     //   console.log('图片加载完成');
     // });
   },//created
+  unmounted() {
+    console.log("销毁");
+  },
   mounted() {
-
+    // setTimeout(console.log(this.$refs.tabControl.$el.offsetTop),1000);
+    // setInterval(console.log(this.$refs.tabControl.$el.offsetTop),5000)
 
   },//mounted
   //监听全局事件
@@ -160,12 +180,24 @@ export default {
       //使用防抖函数,因为将这个方法抽离到common中的utils中。因此不用使用this调用
       // const refresh = this.debounce(this.$refs.scroll.scroll.refresh,200);/* 该组件有问题，更换调用其他的方法能够正常输出内容，不显示报错 */
       // const refresh = this.debounce(this.getHomeMUltidata,200);/* 传入这个函数的时候，能够正常的运行 */
-      const refresh = debounce(this,200);/* 先满足这个防抖需求 */
+      // const refresh = debounce(this,200);/* 先满足这个防抖需求 */
+
+      // console.log(this.$refs.scroll.scroll.refresh);
+      const refresh = debounce(this.$refs.scroll.scroll.refresh,200,this.$refs.scroll.scroll);
       refresh();
       //如果不使用防抖函数
       // this.$refs.scroll.scroll.refresh();
     },
   },
+  activated() {
+    //跳转到刚才离开的位置
+    this.$refs.scroll.scroll.scrollTo(0,this.saveY,0);// x,y,time
+  },
+  deactivated() {
+    //保存当前滚动条的位置
+    this.saveY = this.$refs.scroll.scroll.y;
+  }
+
 }
 </script>
 
@@ -174,23 +206,33 @@ export default {
     .home {
         position: relative;
         height: 100vh;/*view height，也就是视口高度*/
-        padding-top: 44px;
+        /*padding-top: 44px;*/
     }
     .home-nav {
-      position: fixed;
       background-color: #fb7299;
       color: #fff;
-      left: 0;
-      right: 0;
-      top: 0;
-      z-index: 999;
+
+      /*position: fixed;*/
+      /*left: 0;*/
+      /*right: 0;*/
+      /*top: 0;*/
+      /*z-index: 999;*/
   }
-    /*如果直接命名为tab-control的类，会导致相同类名的嵌套*/
-    .tab-control-position {
-        position: sticky;
-        top: 44px;
-        z-index: 9;/*当上拉商品列表的时候，防止标题会被挡住*/
+
+    .tabControl {
+        position: relative;
+        z-index: 9;
     }
+
+
+    /*如果直接命名为tab-control的类，会导致相同类名的嵌套*/
+    /*.fixed {*/
+    /*    position: fixed;*/
+    /*    left: 0;*/
+    /*    right: 0;*/
+    /*    top: 44px;*/
+    /*    z-index: 9;!*当上拉商品列表的时候，防止标题会被挡住*!*/
+    /*}*/
 
 
     .content {
