@@ -10,7 +10,7 @@
 <!-- collection and  shop footer -->
         <choose-item></choose-item>
 <!--        我的订单 order for goods -->
-        <order-for-goods></order-for-goods>
+        <order-for-goods ></order-for-goods>
 <!--    展示列表信息-->
         <list-item :orderList="orderList"></list-item>
 <!--    服务信息-->
@@ -62,6 +62,7 @@
         // jumpToLogin(){
         //     this.$router.push('/login')
         // },
+
     },
     components: {
       NavBar,

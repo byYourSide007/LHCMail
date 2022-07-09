@@ -3,9 +3,6 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 
-
-
-
 createApp(App).use(store).use(router).mount('#app')
 
 //事件总线方式，不能用于vue3

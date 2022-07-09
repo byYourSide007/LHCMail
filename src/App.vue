@@ -16,7 +16,9 @@
   import profile from "@/views/profile/profile";
   import details from '@/views/details/Details';
   import login from '@/views/login/Login'
-
+  import Register from "@/views/register/Register";
+  import Purchase from "@/views/purchase/Purchase";
+  import Order from "@/views/order/Order";
   export default {
     name : 'App',
     components : {
@@ -26,7 +28,10 @@
       Cart,
       profile,
       details,
-      login
+      login,
+      Register,
+      Purchase,
+      Order
     },
     data(){
       return {
@@ -41,6 +46,9 @@
             case 'cart' : return 'Cart';
             case 'profile' : return 'profile';
             case 'login' : return 'login';
+            case 'Register' : return 'register';
+            case 'Purchase' : return 'purchase';
+            case  'Order' : return 'purchase'
             default : return this.$route.name;
         }
       },

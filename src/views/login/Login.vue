@@ -41,7 +41,7 @@
         <another-way></another-way>
 <!--        注册提示-->
         <div class="register">
-            <div>还没有账号?<span>立即注册</span></div>
+            <div>还没有账号?<span @click="register">立即注册</span></div>
         </div>
     </div>
 </template>
@@ -80,7 +80,7 @@ import AnotherWay from "@/views/login/child_login/AnotherWay";
               if (user.password === password){
                 // console.log('登录成功')
                 this.$store.commit('user',user.id)
-                return;
+                // return;
               }
             }
 
@@ -90,6 +90,9 @@ import AnotherWay from "@/views/login/child_login/AnotherWay";
           // console.log(this.$store.state.user);
           this.$router.push('/profile');
         }
+      },
+      register(){
+        this.$router.push('/register')
       }
     },
     components: {

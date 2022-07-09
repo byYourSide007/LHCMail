@@ -12,7 +12,8 @@
             总价格：{{totalPrice}}
         </div>
 <!--        去结算-->
-        <div class="calculate">
+        <div class="calculate"
+            @click="toCalculate">
             去结算({{calculate}})
         </div>
     </div>
@@ -26,9 +27,6 @@
       return {
         checked: false,
       }
-    },
-    props: {
-
     },
     computed: {
       //计算总价格
@@ -90,6 +88,13 @@
       //  这种方式是不可以的,因为两者的值是相互影响的,当其中一个值取反之后,其他的值会随之发生改变,最后会发生无法意料的问题
 
       },
+      toCalculate(){
+        // console.log('去结算')
+        if (this.$store.state.cartList.length === 0){
+          return;
+        }
+        this.$emit('show')
+      }
     },
     components: {CheckButton},
     watch: {

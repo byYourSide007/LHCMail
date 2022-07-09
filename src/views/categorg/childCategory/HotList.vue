@@ -9,8 +9,9 @@
              v-for="(item,index) in hotList"
              :key="index">
             <div class="listItem">
-                <span class="listItemCount">{{index + 1}}</span>
-                <span class="listItemElement">{{item}}</span>
+                <div class="listItemCount"><span >{{index + 1}}</span></div>
+                <div class="listItemElement">{{item}}</div>
+
                 <hr>
             </div>
         </div>
@@ -70,7 +71,8 @@
 
     }
     .listItem {
-
+        display: flex;
+        flex-flow: row wrap;
     }
     .listItem hr {
         /*height: ;*/
@@ -78,11 +80,14 @@
         opacity: .1;
     }
     .listItemCount {
-        /*width: 10px;*/
-        /*height: 10px;*/
+        width: 20px;
+        height: 20px;
+        text-align: center;
         background-color: #ff5f3e;
+        color: #fff;
     }
     .listItemElement {
+
         padding-left: 5px;
     }
 </style>

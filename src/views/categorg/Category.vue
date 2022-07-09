@@ -2,6 +2,7 @@
     <div class="category">
         <searcher></searcher>
         <div class="wrapper">
+            <history-search></history-search>
             <hot-list></hot-list>
         </div>
     </div>
@@ -12,16 +13,18 @@
 
     import Searcher from "@/views/categorg/childCategory/Searcher";
     import HotList from "@/views/categorg/childCategory/HotList";
+    import HistorySearch from "@/views/categorg/childCategory/HistorySearch";
   export default {
     name: "CategoryView",
-    components : {
-      Searcher,
-      HotList
-    },
     data() {
       return {
         scroll : null,
       }
+    },
+    components : {
+      Searcher,
+      HotList,
+      HistorySearch
     },
     created() {
       // new BScroll('.wrapper',{

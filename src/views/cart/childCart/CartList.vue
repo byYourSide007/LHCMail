@@ -5,14 +5,17 @@
                         :key="index"
                         :product="item"></list-item>
         </scroll>
-        <bottom-bar></bottom-bar>
-
+        <for-sure v-if="IsShow"
+                  @cancel="cancel"
+                  ></for-sure>
+        <bottom-bar @show="show"></bottom-bar>
     </div>
 </template>
 
 <script>
 // <!--    不能少去外面的大括号，否则会出现错误，提示 it is  not  a function -->
     import { mapGetters } from 'vuex'
+    import ForSure from "@/views/cart/childCart/ForSure";
 
   //位置定位
     import Scroll from "@/components/common/scroll/Scroll";
@@ -22,25 +25,31 @@
     import BottomBar from "@/views/cart/childCart/BottomBar";
   export default {
     name: "CartList",
+    data(){
+      return {
+        IsShow: false
+      }
+    },
     computed: {
       ...mapGetters([
         'cartList'
       ])
     },
+    methods: {
+      cancel(){
+        this.IsShow = false;
+      },
+      show(){
+        // console.log('show')
+        this.IsShow = true
+      }
+    },
     components: {
       Scroll,
       ListItem,
       BottomBar,
+      ForSure
 
-    },
-    methods: {
-      // chooseAll(){
-      //   for (let item of this.cartList) {
-      //     if (item.checked === false){
-      //       item.checked = true;
-      //     }
-      //   }
-      // }
     },
     //如果不刷新这个滚动条的高度，则当添加完商品之后，滚动条还是为初始值为零
     activated() {

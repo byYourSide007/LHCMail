@@ -1,5 +1,5 @@
 <template>
-    <div class="order">
+    <div class="order" @click="ProfileOrder">
         <div class="words">
             <div class="goods">我的订单</div>
             <div class="all">全部 ></div>
@@ -59,6 +59,11 @@
     components: {
       TabBar,
       TabBarItem,
+    },
+    methods: {
+      ProfileOrder(){
+        this.$router.push('/order')
+      },
     }
   }
 </script>

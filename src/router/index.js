@@ -39,10 +39,24 @@ const routes = [
     path: '/login',
     name: 'login',
     component: () => import('@/views/login/Login')
-    // component: () => import('@/views/details/Details')
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/register/Register')
+  },
+  {
+    path: '/purchase',
+    name: 'purchase',
+    component: () => import('@/views/purchase/Purchase')
+  },
+  {
+    path: '/order',
+    name: 'order',
+    component: () => import('@/views/purchase/Purchase')
 
-  }
-
+    // component: () => import('@/views/profile/childProfile/ProfileOrder')
+  },
 ];
 
 const router = createRouter({
