@@ -7,6 +7,8 @@ export function request(config) {
     // baseURL : "http://123.207.32.32:8000",/*原先的接口，现在已经废弃*/
     timeout : 5000,
   });
+
+
   //2.1 axios请求拦截器
   instance.interceptors.request.use(config => {
     //可以在这里进行数据处理
