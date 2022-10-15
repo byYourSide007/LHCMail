@@ -2,7 +2,8 @@
 <!--  <swiper-comps  v-if="banners.length" class="swiper-comps">-->
   <swiper-comps  v-if="banners.length">
     <swiper-item  v-for="(item,index) in banners" :key="index">
-       <a :href="item.link">
+<!--       <a :href="item.link">-->
+       <a :href="'#'">
            <img :src="item.image"
                 :alt="item.title"
                 @load="imgLoad">

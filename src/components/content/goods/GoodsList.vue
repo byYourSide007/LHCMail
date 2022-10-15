@@ -1,5 +1,6 @@
 <template>
     <div class="goodslist">
+        {{GoodsListItem}}
         <goods-list-item v-for="(item,index) in goods" :key="index" :goodsItem="item" />
     </div>
 </template>
@@ -19,6 +20,9 @@ import GoodsListItem from "@/components/content/goods/GoodsListItem";
     components : {
       GoodsListItem
     },
+    created() {
+      console.log(this.goods)
+    }
 
   }
 </script>

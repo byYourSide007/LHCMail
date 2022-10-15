@@ -58,15 +58,9 @@
 
       }
     },
-
-
   }
 </script>
 <style>
   @import "assets/css/base.css";
   @import "~normalize.css";
-#app {
-
-}
-
 </style>

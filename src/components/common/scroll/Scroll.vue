@@ -26,12 +26,6 @@
         default: true,
       },
     },
-    components : {
-
-    },
-    methods : {
-
-    },
     mounted() {
       this.scroll = new BScroll(this.$refs.wrapper,{/*不能直接使用querySelect选中对应的类，因为这个组件是很多地方都会用到，而这个方法是只能选择第一个类名为指定类名的元素*/
         probeType : this.probeType, /*只要是滚动，都检测*/

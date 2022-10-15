@@ -40,8 +40,11 @@
 // <!-- 可以将导入的组件分成几个部分，（1）导入的方法。（2）子组件。（3）公共组件。（4）导入的数据。-->
 import NavBar from "@/components/common/navbar/NavBar";
 import NavBarItem from "@/components/common/navbar/NavBarItem";
+
 import TabControl from "@/components/common/tabControl/TabControl";
+
 import GoodsList from "@/components/content/goods/GoodsList";
+
 import BScroll from "@/components/common/scroll/Scroll";
 import BackTop from "@/components/content/backTop/BackTop";
 
@@ -85,6 +88,18 @@ export default {
   },
   computed : {
     showGoods(){
+      // const goods = [];
+      // const originGoods = this.goods[this.currentType].list;
+      // for (let el of originGoods) {
+      //   const obj = {};
+      //   obj.cfav = el.cfav;
+      //   obj.price = el.price;
+      //   obj.img = el.show.img;
+      //   obj.title = el.title;
+      //   // console.log(obj);
+      //   goods.push(obj);
+      // }
+      // return goods;
       return this.goods[this.currentType].list
     },
     //用于触发加载图片刷新列表高度
@@ -142,9 +157,11 @@ export default {
       });
     },//getHomeMUltidata
     getHomeGoods(type){
+      // 数据是从第一页开始的，因此要先将参数加一才能正确请求，否则显示 400 状态码
       const page = this.goods[type].page + 1;//创建一个变量存储页数，才能动态请求数据
       //请求商品数据
       getHomeGoods(type,page).then(res => {
+        // console.log(res);
         this.goods[type].list.push(...res.data.list);
         this.goods[type].page += 1;
         this.$refs.scroll.scroll.finishPullUp();
@@ -153,6 +170,7 @@ export default {
   },//methods
   //当组件被成功创建之后
   created() {
+    // console.log(this.goods[this.currentType].list);
     //1.获取多个数据
     this.getHomeMUltidata();//要记得使用this调用，如果不使用this，则使用的是上面import中的内容，而使用了this，调用的是本组件中的这个方法
     //2.获取展示商品的数据

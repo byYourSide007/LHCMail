@@ -59,12 +59,6 @@
     /*    上面原先失效的原因，是因为由于前面样式的调整，以至于将 style中的 scoped 进行删除掉，恢复scoped 便可以正常设置*/
     }
 
-    /*.goods img {*/
-    /*    !*width: 100%;*!*/
-    /*    width: 48%;*/
-    /*    border-radius: 5px;*/
-    /*}*/
-
     .goods-item img{
         width: 100%;
     }
