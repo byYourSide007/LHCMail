@@ -43,6 +43,7 @@
         swiperStyle: {}, // swiper样式
         currentIndex: 1, // 当前的index
         scrolling: false, // 是否正在滚动
+        playTimer : null,
       };
     },
     mounted: function () {
@@ -59,13 +60,15 @@
        * 定时器操作
        */
       startTimer: function () {
-        this.playTimer = window.setInterval(() => {
+        this.playTimer = setInterval(() => {
             this.currentIndex++;
             this.scrollContent(-this.currentIndex * this.totalWidth);
-        }, this.interval)
+        }, this.interval);
       },
       stopTimer: function () {
-        window.clearInterval(this.playTimer);
+        // 如果直接定义全局变量，会出现无法清除定时器的情况出现，如果在 data 中设置一个变量去存储定时器，则可以清除定时器
+        // 轮播图问题暂时已发现问题已解决
+        clearInterval(this.playTimer);
       },
 
       /**

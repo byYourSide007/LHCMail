@@ -1,13 +1,13 @@
 <template>
     <div class="wrapper" ref="wrapper"><!--这个盒子是根，ref一般绑定到子组件-->
         <div class="content"><!--这个盒子中存放的才是内容-->
-            <slot ></slot>
+            <slot></slot>
         </div>
     </div>
 </template>
 
 <script>
-  import BScroll from 'better-scroll'
+  import BScroll from 'better-scroll';
 
   export default {
     name: "BScroll",

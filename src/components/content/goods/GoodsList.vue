@@ -20,10 +20,6 @@ import GoodsListItem from "@/components/content/goods/GoodsListItem";
     components : {
       GoodsListItem
     },
-    created() {
-      console.log(this.goods)
-    }
-
   }
 </script>
 

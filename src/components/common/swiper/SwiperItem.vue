@@ -18,7 +18,7 @@
   }
 
   .slide img {
-      border-style: none;
+    border-style: none;
     width: 100%;
   }
 </style>
