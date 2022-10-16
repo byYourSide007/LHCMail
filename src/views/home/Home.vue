@@ -208,12 +208,17 @@ export default {
     },
   },
   activated() {
+    // console.log(this.saveY);
     //跳转到刚才离开的位置
     this.$refs.scroll.scroll.scrollTo(0,this.saveY,0);// x,y,time
+    // this.$refs.scroll.scroll.scrollTo(0,-1000,0);// x,y,time
+    this.$refs.scroll.scroll.refresh();// 重新刷新之后再次回到首页才能保持页面不会发生卡顿
   },
   deactivated() {
     //保存当前滚动条的位置
+    // this.saveY = this.$refs.scroll.scroll.y;
     this.saveY = this.$refs.scroll.scroll.y;
+    // console.log(this.saveY);
   }
 
 }
