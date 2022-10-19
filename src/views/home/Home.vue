@@ -182,9 +182,10 @@ export default {
     // this.$bus.on('imageLoad',() => {
     //   console.log('图片加载完成');
     // });
+
   },//created
   unmounted() {
-    console.log("销毁");
+    // console.log("销毁");
   },
   mounted() {
     // setTimeout(console.log(this.$refs.tabControl.$el.offsetTop),1000);

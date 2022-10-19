@@ -20,6 +20,12 @@ import GoodsListItem from "@/components/content/goods/GoodsListItem";
     components : {
       GoodsListItem
     },
+    unmounted() {
+      // console.log("destroyed")
+    },
+    mounted() {
+      // console.log("mounted");
+    }
   }
 </script>
 

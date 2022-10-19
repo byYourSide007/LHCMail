@@ -2,11 +2,10 @@
     <div id="mine">
 <!--        导航栏-->
         <nav-bar>
-            <nav-bar-item class="nav-bar-item"><template #center> <div>ByYourSide</div></template></nav-bar-item>
+            <nav-bar-item class="nav-bar-item"><template #center> <div>Profile</div></template></nav-bar-item>
         </nav-bar>
 <!--        个人信息-->
-        <personal-data :personalData="personalData[user]"
-                       ></personal-data>
+        <personal-data :personalData="personalData[user]"></personal-data>
 <!-- collection and  shop footer -->
         <choose-item></choose-item>
 <!--        我的订单 order for goods -->

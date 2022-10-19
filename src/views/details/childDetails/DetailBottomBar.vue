@@ -1,22 +1,22 @@
 <template>
     <div class="bottom-bar">
         <div class="bar-item bar-left">
-            <div>
+            <div @click="toastAlert('customerService')">
                 <i class="icon service"></i>
                 <span class="text">客服</span>
             </div>
-            <div>
+            <div @click="toastAlert('shop')">
                 <i class="icon shop"></i>
                 <span class="text">店铺</span>
             </div>
-            <div>
+            <div @click="toastAlert('collection')">
                 <i class="icon select"></i>
                 <span class="text">收藏</span>
             </div>
         </div>
         <div class="bar-item bar-right">
             <div class="cart" @click="addToCart">加入购物车</div>
-            <div class="buy">购买</div>
+            <div class="buy" @click="toastAlert('purchase')">购买</div>
         </div>
     </div>
 </template>
@@ -26,7 +26,10 @@
     name: "DetailBottomBar",
     methods: {
       addToCart() {
-        this.$emit('addToCart')
+        this.$emit('addToCart',"cart")
+      },
+      toastAlert(showType) {
+        this.$emit("toastAlert",showType)
       }
     }
   }

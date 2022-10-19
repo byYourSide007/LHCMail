@@ -73,9 +73,9 @@
         display: flex;
         flex-flow: column wrap;
         height: 50px;
-        padding-top: 10px;
-        /*padding-left: 2px;*/
-        padding-bottom: 40px;
+        /*padding-top: 10px;*/
+        /*padding-bottom: 40px;*/
+        padding: 10px 20px 40px;
 
         background-color: #a3a3a5;
         border-radius: 5%;

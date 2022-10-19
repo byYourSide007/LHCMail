@@ -1,62 +1,56 @@
-<template>
+<template >
     <div class="login">
-<!--        登录标题    -->
-        <div class="title">登录</div>
-
-<!--        输入内容-->
-        <div class="label">
-            <form action="#" class="input">
-                <!--                用户名 -->
-                <div class="username">
-                    <span>用户名：</span>
-                    <label>
-                        <input type="text" placeholder="请输入用户名" ref="login_username">
-                    </label>
-                </div>
-                <!--                密码  -->
-                <div class="password">
-                    <span>密码：</span>
-                    <label>
-                        <input type="password" value="" placeholder="请输入密码" ref="login_password" >
-                    </label>
-                    <span class="forget">忘记密码？</span>
-                </div>
-            </form>
-        </div>
-
-<!--        记住我按钮 -->
-        <div class="remember_me">
-            <label><input type="checkbox" checked></label>
-            <span>记住我</span>
-        </div>
-<!--        登录按钮-->
-        <div class="login_button" @click="upload">
-            <span >登录</span>
-        </div>
-        <!--提示用户-->
-        <div class="alert" v-show="show">
-            <span >请输入用户名和密码</span>
-        </div>
-<!--        其他登录方式-->
-        <another-way></another-way>
-<!--        注册提示-->
-        <div class="register">
-            <div>还没有账号?<span @click="register">立即注册</span></div>
+        <nav-bar class="login-nav"><!--导航栏-->
+            <nav-bar-item><template #center>登录</template></nav-bar-item>
+        </nav-bar>
+        <div class="content">
+            <div>
+                <form action="#" class="form-input">
+                    <div class="username">
+                        <label><input type="text"
+                                      placeholder="请输入用户名"
+                                      ref="login_username"
+                                      @blur="alertUsername"></label>
+                        <div :class="alertUsernameClass">请输入用户名</div>
+                    </div>
+                    <div class="password">
+                        <label><input type="password"
+                                      placeholder="请输入密码"
+                                      ref="login_password"
+                                      @blur="alertPassword"></label>
+                        <div :class="alertPssswordClass">请输入密码</div>
+                    </div>
+                </form>
+            </div>
+            <!--        登录按钮-->
+            <div class="login_button" @click="upload">
+                <span>登录</span>
+            </div>
+            <!--        其他登录方式-->
+            <another-way class="another_way"></another-way>
+            <!--        注册提示-->
+            <div class="register">
+                <div>还没有账号?<span >立即注册</span></div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-import AnotherWay from "@/views/login/child_login/AnotherWay";
+  import NavBar from "@/components/common/navbar/NavBar";
+  import NavBarItem from "@/components/common/navbar/NavBarItem";
+  import AnotherWay from "@/views/login/child_login/AnotherWay";
   export default {
     name: "LogIn",
     data(){
         return {
           show : false,
-          userInfo : this.$store.state.personalData
+          userInfo : this.$store.state.personalData,
+          alertUsernameClass : "not_active",
+          alertPssswordClass : "not_active"
         }
     },
-    computed: {
+    computed : {
 
     },
     methods: {
@@ -67,35 +61,45 @@ import AnotherWay from "@/views/login/child_login/AnotherWay";
         //如果用户名或密码为空
         if ((username === undefined || username === null || username === '') && (password === undefined || password === null || password === '')){
           setTimeout(() => {
-            //两秒后显示内容去除
-            this.show = false
+            this.show = false;            //两秒后显示内容去除
           },2000);
-          //显示提示内容
-          this.show = true;
+          this.show = true;          //显示提示内容
         }else {
           for (let user of this.userInfo) {
-            //如果输入的用户名和存储的用户信息的用户名吻合
-            if (user.username === username){
-              //如果该用户的密码与存储的该用户名下的密码吻合
-              if (user.password === password){
-                // console.log('登录成功')
-                this.$store.commit('user',user.id)
-                // return;
-              }
+            if (user.username === username && user.password === password){
+                this.$store.commit('user',user.id);
             }
-
           }
-          // const id = Number(1)
-          //
-          // console.log(this.$store.state.user);
           this.$router.push('/profile');
         }
       },
       register(){
         this.$router.push('/register')
+      },
+      alertUsername(){
+        const value = this.$refs.login_username.value;
+        if (value){
+          this.alertUsernameClass = "not_active";
+          this.$refs.login_username.style.borderColor = "gray";
+        }else {
+          this.alertUsernameClass = "active";
+          this.$refs.login_username.style.borderColor = "red";
+        }
+      },
+      alertPassword() {
+        const value = this.$refs.login_password.value;
+        if (value) {
+          this.alertPssswordClass = "not_active";
+          this.$refs.login_password.style.borderColor = "gray";
+        } else {
+          this.alertPssswordClass = "active";
+          this.$refs.login_password.style.borderColor = "red";
+        }
       }
     },
     components: {
+      NavBarItem,
+      NavBar,
       AnotherWay
     },
     activated() {
@@ -113,97 +117,75 @@ import AnotherWay from "@/views/login/child_login/AnotherWay";
     .login {
         /*保障背景图片能够盖住TabBar的关键*/
         position: relative;
-        /*display: flex;*/
         height: 100vh;
         background-image: url('@/assets/img/login/background.jpg');
-        background-size: 50vh;
+        background-size: contain;
+        /*background-color: #999999;*/
+        /*background-repeat: no-repeat;*/
         z-index: 1;
     }
-    .title{
-        align-items: center;
-        padding-left: 160px;
-
-        font-size: 30px;
+    .login-nav {
+        font-size: 20px;
+        font-weight: 700;
         color: #fff;
-
-        border-bottom: 1px solid #a3a3a5;
+        background-color: #eb4868;
     }
-    .label {
-        display: flex;
-        color: #fff;
+    .content {
+        /*position: relative;*/
+        width: 390px;
+        top: 44px;
+        height: calc(100vh-44px);
+        margin: 0 auto;
     }
-    .input{
-        flex: 1;
-        padding-top: 240px;
-        /*padding-right: 100px;*/
-        padding-left: 50px;
-        /*right: ;*/
-        /*right: 0;*/
+    .form-input{
+        position: relative;
+        width: 390px;
+        height: 80px;
+        margin-top: 10vh;
     }
-    .password{
-        margin-top: 10px;
+    .form-input input {
+        padding: 5px 3px;
     }
-    .password input{
-        margin-left: 15px;
+    .username,.password {
+        width: 186px;
+        margin: 0 auto;
     }
-    .forget {
-        margin-left: 10px;
-        font-size: 15px;
-    }
-    .remember_me{
-        padding-top: 20px;
-        padding-left: 110px;
-        color: #fff;
-    }
-    .remember_me span {
-        padding-left: 5px;
-    }
-    .remember_me input {
-        /*
-            未搜到改变复选框大小的方法， 寻找到的方法并没有生效
-            如果想使用类似复选框的样式，则需要模拟
-        */
-        /*zoom: 180%;*/
-        /*width: 100px;*/
-    }
-    /*提示内容*/
-    .alert{
-        flex: 1;
-        position: absolute;
-        width: 80vw;
-        font-size: 30px;
-        /*padding-left: 30px;*/
-        margin-top: -250px;
-        margin-left: 30px;
-        text-align: center;
-        border-radius: 20%;
-        box-shadow: #eb4868;
-        opacity: 0.6;
-        background-color: #ef4562;
-        color: #fff;
-    }
+    .password{margin-top: 20px;}
+    /*.username,.password input ::*/
     .login_button {
         width: 200px;
         height: 45px;
-        margin-top: 50px;
-        margin-left: 110px;
+        /*margin-top: 50px;*/
+        margin: 50px auto;
         text-align: center;
-        border-radius: 5%;
+        line-height: 45px;
+        border-radius: 15px;
         font-size: 30px;
         background-color: #ff5777;
         color: #fff;
     }
-    .login_button span {
-        padding-top: 5px;
-        /*padding: 15px;*/
+    .another_way {
+        width: 390px;
     }
     .register{
-        padding-top: 150px;
-        padding-left: 110px;
+        position: relative;
+        width: 172px;
+        /*margin: 0 auto;*/
+        margin: 100% auto;
         color: #fff;
     }
     .register span{
         padding-left: 10px;
-        color: #ef4562;
+        /*color: #ef4562;*/
+        /*color: red;*/
+        color: violet;
+    }
+    .active {
+        display: block;
+        margin: 5px  ;
+        color: red;
+    }
+    .not_active {
+        display: none;
     }
 </style>

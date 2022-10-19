@@ -18,7 +18,8 @@
         display: flex;
 
         /*固定位置*/
-        position: fixed;
+        /*position: fixed;*/
+        position: absolute;/*二者选一均可*/
 
         /*设置背景颜色*/
         background-color: #f6f6f6;

@@ -1,5 +1,6 @@
 <template>
         <div id="personal-data" @click="jumpToLogin">
+<!--        <div id="personal-data" >-->
 <!--            <div class="profile_photo"><img src="@/assets/img/profile/profile_photo.svg" alt="头像"></div>-->
             <div class="profile_photo"><img :src="personalData.arrowhead" alt="头像"></div>
             <div class="login">

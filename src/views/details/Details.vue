@@ -1,5 +1,8 @@
 <template>
     <div id="details">
+<!--        <toast-show :showType="toastShowType"></toast-show>-->
+        <detail-toast v-show="toastShow"
+                      :show-type="toastShowType"></detail-toast>
         <detail-nav-bar
                 class="detail-nav-bar"
                 @titleClick="titleClick"
@@ -18,7 +21,8 @@
         </Scroll>
         <detail-bottom-bar
                 class="detail-bottom-bar"
-                @addToCart="addToCart"></detail-bottom-bar>
+                @addToCart="addToCart"
+                @toastAlert="toastAlert"></detail-bottom-bar>
     </div>
 </template>
 
@@ -32,7 +36,8 @@
     import DetailParamInfo from "@/views/details/childDetails/DetailParamInfo";
     import DetailCommentInfo from "@/views/details/childDetails/DetailCommentInfo";
     import DetailBottomBar from "@/views/details/childDetails/DetailBottomBar";
-
+    // import ToastShow from "@/components/common/toast/ToastShow";
+    import DetailToast from "@/views/details/childDetails/DetailToast";
     //导入组织内容的框架
     import Scroll from "@/components/common/scroll/Scroll";
     import GoodsList from "@/components/content/goods/GoodsList";
@@ -56,6 +61,10 @@ import {debounce} from "@/common/utils";
         itemOffsetTop:[],
         getThemeTopY: null,
         currentIndex:0,
+        toastShow : false,
+        // toastShow : true,
+        toastShowType : "",
+        timer : null
       }
     },
     components:{
@@ -69,7 +78,8 @@ import {debounce} from "@/common/utils";
       DetailCommentInfo,
       GoodsList,
       DetailBottomBar,
-
+      // ToastShow,
+      DetailToast
     },
       methods:{
         imgLoad(){
@@ -129,7 +139,7 @@ import {debounce} from "@/common/utils";
 
         },
         //点击  添加到购物车按钮 添加到购物车所选中的商品
-        addToCart(){
+        addToCart(type){
           // console.log(this.goods)//查看其中的数据存放位置
           //整理购物车所需要的信息
           const product = {};
@@ -139,6 +149,23 @@ import {debounce} from "@/common/utils";
           product.price = this.goods.nowPrice;
           product.iid = this.iid
           this.$store.commit('addToCart',product)
+
+        //  显示提示内容
+          this.toastShowType = type;
+          this.toastShow = true;
+          this.timerFun();
+        },
+        /* 对于 toast 所显示的内容进行告知 */
+        toastAlert(type) {
+          this.toastShowType = type;
+          this.toastShow = true;
+          this.timerFun()
+        },
+        timerFun(){
+          clearTimeout(this.timer);
+          this.timer = setTimeout(() => {
+            this.toastShow = false;
+          },1000);
         }
       },
     created() {
@@ -192,6 +219,8 @@ import {debounce} from "@/common/utils";
           this.itemOffsetTop.push(-this.$refs.recommend.$el.offsetTop);
           // console.log(this.itemOffsetTop);
         },200);
+        // this.$store.addEventListener("")
+
     },
     }
 </script>

@@ -20,7 +20,7 @@
             <template #item-icon_active ><div><img src="@/assets/img/tabbar/mine_active.svg" alt="我的"></div></template>
             <template #item-text><div>我的</div></template>
         </tab-bar-item>
-        <div class="filing"><a href="https://beian.miit.gov.cn/">豫ICP备2022018477号</a></div>
+<!--        <div class="filing"><a href="https://beian.miit.gov.cn/">豫ICP备2022018477号</a></div>-->
     </tab-bar>
 </template>
 
@@ -54,8 +54,8 @@
      /*    图片下面会有三个像素的富裕空间，可以设置下面的属性让其去除这三个像素的空间,让问题和图片更加的紧凑*/
      vertical-align: middle;
  }
- .filing {
-     line-height: 49px;
-    color: #000;
- }
+ /*.filing {*/
+ /*    line-height: 49px;*/
+ /*   color: #000;*/
+ /*}*/
 </style>

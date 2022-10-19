@@ -50,6 +50,9 @@
 </script>
 
 <style scoped>
+    .another_way {
+        position: relative;
+    }
      >>> .tab-bar-item{
         /*padding-top: 50px;*/
         /*margin-top: 50px;*/

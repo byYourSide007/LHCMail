@@ -1,24 +1,27 @@
 <template>
     <div class="hot">
-        <div class="title">
-            <img src="@/assets/img/category/hot.svg" alt="热搜" class="topImg">
-            <p class="hotSearch"><b>万盛热搜</b></p>
-            <p class="allKnow">今日热搜全知道 ></p>
-        </div>
-        <div class="list"
-             v-for="(item,index) in hotList"
-             :key="index">
-            <div class="listItem">
-                <div class="listItemCount"><span >{{index + 1}}</span></div>
-                <div class="listItemElement">{{item}}</div>
-
-                <hr>
+        <scroll probe-type="3"
+                class="scroll">
+            <div class="title">
+                <img src="@/assets/img/category/hot.svg" alt="热搜" class="topImg">
+                <p class="hotSearch"><b>万盛热搜</b></p>
+                <p class="allKnow">今日热搜全知道 ></p>
             </div>
-        </div>
+            <div class="list"
+                 v-for="(item,index) in hotList"
+                 :key="index">
+                <div class="listItem">
+                    <div class="listItemCount"><span >{{index + 1}}</span></div>
+                    <div class="listItemElement">{{item}}</div>
+                    <hr>
+                </div>
+            </div>
+        </scroll>
     </div>
 </template>
 
 <script>
+    import Scroll from "@/components/common/scroll/Scroll";
   export default {
     name: "HotList",
     data(){
@@ -37,42 +40,44 @@
           ]
         }
     },
+    components : {
+      Scroll
+    }
   }
 </script>
 
 <style scoped>
     .hot{
-        margin-top: 10px;
-        margin-left: 15px;
-        margin-right: 15px;
+        position: relative;
+        /*height: calc(100vh-49px);*/
+        height: 100vh;
+        /*height: calc(100vh-49px);*/
+        /*margin: 10px 15px;*/
+        /*padding-bottom: 500px;*/
+        /*top: 49px;*/
         border: 1px solid goldenrod;
         border-radius: 10px;
     }
     .title {
+        position: relative;
         display: flex;
         height: 50px;
         color: darkgoldenrod;
     }
-    .topImg {
-        width: 30px;
-    }
-    .hotSearch{
-        flex: 1;
-    }
-    .allKnow {
-        padding-right: 5px;
-        /*right: 0;*/
-        /*padding-right: 0;*/
-        /*text-align: right;*/
-    }
+    .topImg { width: 30px;}
+    .allKnow {padding-right: 5px; }
     .list {
-        margin-top: 5px;
-        /*border-bottom: 1px solid #a3a3a5;*/
-
+        display: flex;
+        flex-flow: column nowrap;
+        margin-top: 8px;
+        max-lines: 1;
+        text-overflow: ellipsis;
     }
     .listItem {
         display: flex;
-        flex-flow: row wrap;
+        width: 1000px;
+        height: 20px;
+        flex-flow: row nowrap;
     }
     .listItem hr {
         /*height: ;*/
@@ -87,7 +92,9 @@
         color: #fff;
     }
     .listItemElement {
-
         padding-left: 5px;
+    }
+    .scroll {
+        position: absolute;
     }
 </style>
