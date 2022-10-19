@@ -1,11 +1,13 @@
 <template>
     <div class="category">
-        {{content}}
-        <searcher></searcher>
-        <div class="wrapper">
-            <history-search></history-search>
+        <searcher
+                @historyShow="historyShow"
+                @search = "search"></searcher>
+        <history-search
+                v-show="isHistoryShow"
+                :search_value="search_value"></history-search>
+        <div class="wrapper" @click="historyGone">
             <scroll probe-type="3" class="scroll">
-
                 <hot-list></hot-list>
             </scroll>
         </div>
@@ -26,6 +28,8 @@ import {result} from "@/views/search/childComps/index.js"
       return {
         scroll : null,
         content : result,
+        isHistoryShow : false,
+        search_value : "",
       }
     },
     components : {
@@ -33,6 +37,20 @@ import {result} from "@/views/search/childComps/index.js"
       HotList,
       HistorySearch,
       Scroll
+    },
+    methods : {
+      historyShow() {
+        this.isHistoryShow = true;
+      },
+      historyGone() {
+        this.isHistoryShow = false;
+      },
+      clearHistory() {
+        alert("alert")
+      },
+      search(value) {
+        this.search_value = value;
+      }
     },
     created() {
       // new BScroll('.wrapper',{

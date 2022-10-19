@@ -48,12 +48,12 @@
         width: 30px;
     }
     .toast-text-content {
+        width: 150px;
         line-height: 20px;
         text-align: center;
         font-size: 10px;
         /*bottom: 5px;*/
         top: -5px;
         color: #FFF;
-        z-index: 999;
     }
 </style>

@@ -49,33 +49,34 @@
 <style scoped>
     .hot{
         position: relative;
-        /*height: calc(100vh-49px);*/
-        height: 100vh;
-        /*height: calc(100vh-49px);*/
-        /*margin: 10px 15px;*/
-        /*padding-bottom: 500px;*/
-        /*top: 49px;*/
+        width: 96vw;
+        min-width: 230px;
+        height: 60vh;
+        margin: 15px auto;
         border: 1px solid goldenrod;
         border-radius: 10px;
+        text-overflow: ellipsis;
     }
     .title {
         position: relative;
         display: flex;
+        width: 100%;
         height: 50px;
         color: darkgoldenrod;
     }
     .topImg { width: 30px;}
-    .allKnow {padding-right: 5px; }
+    .allKnow {margin-left: 130px}
     .list {
         display: flex;
         flex-flow: column nowrap;
         margin-top: 8px;
+        margin-left: 10px;
         max-lines: 1;
         text-overflow: ellipsis;
     }
     .listItem {
         display: flex;
-        width: 1000px;
+        width: 600px;
         height: 20px;
         flex-flow: row nowrap;
     }

@@ -1,14 +1,29 @@
 <template>
     <div class="searcher">
        <img src="@/assets/img/category/searcher.svg" alt="搜索">
-        <input type="text" placeholder="请输入商品名称">
-        <span>搜索</span>
+        <input type="text"
+               placeholder="请输入商品名称"
+               @click="historyShow" ref="search_value">
+        <span @click="search">搜索</span>
     </div>
 </template>
 
 <script>
   export default {
-    name: "SearcherIn"
+    name: "SearcherIn",
+    methods : {
+      historyShow() {
+        this.$emit("historyShow")
+      },
+      historyGone() {
+        this.$emit('historyGone');
+      },
+      search() {
+        const value = this.$refs.search_value.value;
+
+        this.$emit("search",value);
+      },
+    }
   }
 </script>
 
@@ -27,6 +42,7 @@
         /*padding: 0;*/
 
         background-color: #F4F4F4;
+        /*border-bottom: 3px solid red;*/
     }
     .searcher img {
         width: 49px;

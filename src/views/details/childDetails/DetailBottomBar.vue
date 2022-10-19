@@ -1,17 +1,23 @@
 <template>
     <div class="bottom-bar">
         <div class="bar-item bar-left">
-            <div @click="toastAlert('customerService')">
+            <div >
                 <i class="icon service"></i>
                 <span class="text">客服</span>
             </div>
-            <div @click="toastAlert('shop')">
+            <div >
                 <i class="icon shop"></i>
                 <span class="text">店铺</span>
             </div>
-            <div @click="toastAlert('collection')">
+            <div @click="toastAlert('collection')" v-if="!isCollect">
                 <i class="icon select"></i>
                 <span class="text">收藏</span>
+            </div>
+            <div @click="toastAlert('collection')" v-else>
+                <img src="@/assets/img/detail/collection_success.svg"
+                     alt="收藏成功"
+                     class="icon detail_collected">
+                <span class="text">已收藏</span>
             </div>
         </div>
         <div class="bar-item bar-right">
@@ -24,12 +30,25 @@
 <script>
   export default {
     name: "DetailBottomBar",
+    data() {
+      return {
+        isCollect : false
+      }
+    },
     methods: {
       addToCart() {
         this.$emit('addToCart',"cart")
       },
       toastAlert(showType) {
-        this.$emit("toastAlert",showType)
+        if (showType === 'collection') {
+          this.isCollect = !this.isCollect;
+          if (this.isCollect) {
+            this.$emit("toastAlert",showType);
+          }
+        } else {
+          this.$emit("toastAlert",showType);
+        }
+
       }
     }
   }
@@ -90,5 +109,8 @@
 
     .bar-right .buy {
         background-color: #f69;
+    }
+    .detail_collected {
+        width: 22px;
     }
 </style>

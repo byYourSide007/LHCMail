@@ -8,9 +8,7 @@
             </nav-bar>
 <!--        商品列表-->
         <cart-list></cart-list>
-
 <!--        底部汇总-->
-
     </div>
 </template>
 
@@ -18,6 +16,7 @@
 // <!--    外部组件-->
     import NavBar from "@/components/common/navbar/NavBar";
     import NavBarItem from "@/components/common/navbar/NavBarItem";
+
 
     //内部组件
     import CartList from "@/views/cart/childCart/CartList";
@@ -48,7 +47,7 @@
     components: {
       NavBar,
       NavBarItem,
-      CartList
+      CartList,
     },
 
   }

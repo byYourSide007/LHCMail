@@ -11,7 +11,6 @@
                 刘红晨 17316196526
             </div>
         </div>
-
     </div>
 </template>
 
@@ -30,7 +29,7 @@
     }
     .img img{
         padding-top: 3px;
-        width: 50px;
+        width: 45px;
     }
     .text_location{
         color: black;

@@ -37,13 +37,12 @@
 
 <style scoped>
     .bottom {
-        /*border: 1px solid #ff5f3e;*/
-        /*position: absolute;*/
         position: fixed;
         display: flex;
-        height: 55px;
+        height: 70px;
         left: 0;right: 0;bottom: 0;
-        background: #f2f5f8;
+        margin: auto;
+        background: #eee;
         /*z-index: 999;*/
     }
     .token{
