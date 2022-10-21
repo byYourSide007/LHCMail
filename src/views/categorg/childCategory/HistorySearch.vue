@@ -4,11 +4,13 @@
             <p><b>历史搜索</b></p>
                 <img src="@/assets/img/category/trash_can.svg"
                       alt="垃圾桶" @click="clearHistory"></div>
-        <div class="content">
-            <div  v-for="(item,index) in historyItem"
-                  :key="index">
-                <div class="item">{{item}}</div>
-            </div>
+        <div>
+            <ul class="content" >
+                <li class="item"
+                    v-for="(item,index) in historyItem"
+                    :key="index"
+                    @click="insertValue(item)">{{item}}</li>
+            </ul>
             <div v-if="!historyItem.length" class="history-null">历史记录为空</div>
         </div>
 
@@ -21,11 +23,10 @@
     data(){
       return {
         historyItem: [
-            '源窝子',
-            '复古美式polo栅男',
-            '瑜伽垫男士健身',
-            '水杯',
-            '桌面收纳盒'
+            '趣味中性风',
+            '那不勒斯西裤',
+            '西裤',
+            '中性风',
         ]
       }
     },
@@ -36,7 +37,11 @@
     },
     methods : {
       clearHistory() {
+        this.$emit("clearInput")
         this.historyItem = [];
+      },
+      insertValue(value) {
+        this.$emit('insertValue',value);
       }
     },
     watch : {
@@ -68,17 +73,26 @@
         flex: 1;
         padding-left: 20px;
         color: #222222;
+
     }
     .content {
         display: flex;
         flex-flow: row wrap;
+        padding: 0;
+        margin: 0;
     }
     .item {
         height: 20px;
-        margin: 5px;
-        padding: 3px;
+        align-items: flex-start;
+        /*margin: 5px;*/
+        /*padding: 3px 5px;*/
+        /*border-radius: 10px;*/
+        /*background-color: #999999;*/
+        margin: 3px 5px;
+        padding: 3px 5px;
         border-radius: 5px;
-        background-color: #999999;
+        list-style: none;
+        background-color: #fff;
     }
     .history-null {
         /*margin-left: 20px;*/

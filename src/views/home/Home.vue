@@ -170,7 +170,6 @@ export default {
   },//methods
   //当组件被成功创建之后
   created() {
-    // console.log(this.goods[this.currentType].list);
     //1.获取多个数据
     this.getHomeMUltidata();//要记得使用this调用，如果不使用this，则使用的是上面import中的内容，而使用了this，调用的是本组件中的这个方法
     //2.获取展示商品的数据
@@ -245,6 +244,7 @@ export default {
 
     .tabControl {
         position: relative;
+        top: -1px;
         z-index: 9;
     }
 

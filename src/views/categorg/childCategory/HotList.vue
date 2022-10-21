@@ -5,7 +5,7 @@
             <div class="title">
                 <img src="@/assets/img/category/hot.svg" alt="热搜" class="topImg">
                 <p class="hotSearch"><b>万盛热搜</b></p>
-                <p class="allKnow">今日热搜全知道 ></p>
+<!--                <p class="allKnow">今日热搜全知道 ></p>-->
             </div>
             <div class="list"
                  v-for="(item,index) in hotList"
@@ -27,16 +27,16 @@
     data(){
         return {
           hotList : [
-            '敏感鸡也能用',
-            '周杰伦2022新专辑',
-            '黄桃党真的会谢',
-            '真相只有一个',
-            '周玉坤少女心布艺',
-            '刘锡山用了都说好的男生保护套',
-            '噗噗叽叽',
-            '今夏要有骗子连衣裙',
-            '消暑小窍门',
-            '蹬蹬蹬'
+            '消费券免费领取',
+            '秋冬羽绒 温暖焕新',
+            '买奥特曼上京东',
+            '吃石榴不吐石榴籽',
+            '因爱而生 探索宇宙',
+            '学稻盛和夫经营哲学',
+            '出行加油 单单减',
+            '补水面膜 呵护肌肤',
+            '北京环球影城度假区',
+            '华为路由 Q6'
           ]
         }
     },

@@ -14,10 +14,19 @@
                         <div :class="alertUsernameClass">请输入用户名</div>
                     </div>
                     <div class="password">
-                        <label><input type="password"
+                        <label class="passwordLabel">
+                            <input type="password"
                                       placeholder="请输入密码"
                                       ref="login_password"
-                                      @blur="alertPassword"></label>
+                                      @blur="alertPassword">
+                            <img src="@/assets/img/login/open_eyes.svg"
+                                 alt="close"
+                                 v-if="passwordShow"
+                                 @click="closeEyes">
+                            <img src="@/assets/img/login/eyes_close.svg"
+                                 alt="close"
+                                 v-if="!passwordShow"
+                                 @click="openEyes"></label>
                         <div :class="alertPssswordClass">请输入密码</div>
                     </div>
                 </form>
@@ -47,7 +56,8 @@
           show : false,
           userInfo : this.$store.state.personalData,
           alertUsernameClass : "not_active",
-          alertPssswordClass : "not_active"
+          alertPssswordClass : "not_active",
+          passwordShow : false
         }
     },
     computed : {
@@ -95,6 +105,14 @@
           this.alertPssswordClass = "active";
           this.$refs.login_password.style.borderColor = "red";
         }
+      },
+      openEyes() {
+        this.passwordShow = true;
+        this.$refs.login_password.type = "text"
+      },
+      closeEyes() {
+        this.passwordShow = false,
+        this.$refs.login_password.type = "password"
       }
     },
     components: {
@@ -151,6 +169,18 @@
         margin: 0 auto;
     }
     .password{margin-top: 20px;}
+    .passwordLabel {
+        display: flex;
+        position: relative;
+
+    }
+    .password img {
+        position: absolute;
+        width: 20px;
+        top: 6px;
+        right: 3px;
+        margin: auto;
+    }
     /*.username,.password input ::*/
     .login_button {
         width: 200px;

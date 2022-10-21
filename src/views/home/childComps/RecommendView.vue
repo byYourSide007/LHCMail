@@ -36,7 +36,8 @@
         flex: 1;
     }
     .recommend-item img{
-        width: 100px;
+        /*width: 100px;*/
+        width: 100%;
         align-content: center;
     }
 
