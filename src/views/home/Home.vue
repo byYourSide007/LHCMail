@@ -2,7 +2,14 @@
   <div class="home">
       <!--    导航栏   -->
           <nav-bar class="home-nav">
-              <nav-bar-item><template #center><div>购物街</div></template></nav-bar-item>
+              <nav-bar-item>
+<!--                  <template #center><div>购物街</div></template>-->
+                  <template #center><div>豫ICP备2022018477号</div></template>
+<!--                  <template #right>-->
+<!--                      <div><a href="https://beian.miit.gov.cn/">豫ICP备2022018477号</a></div>-->
+<!--                      <div>豫ICP备2022018477号</div>-->
+<!--                  </template>-->
+              </nav-bar-item>
           </nav-bar>
       <!--    显示栏  -->
       <tab-control :title="['流行','新款','精选']"

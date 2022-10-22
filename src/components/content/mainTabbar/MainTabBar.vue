@@ -6,8 +6,11 @@
             <template #item-text ><div >主页</div></template>
         </tab-bar-item>
         <tab-bar-item path="/category" activeColor="red" class="tab-bar-item">
-            <template #item-icon><div ><img src="@/assets/img/tabbar/category.svg" alt="类别"></div></template>
-            <template #item-icon_active ><div><img src="@/assets/img/tabbar/category_active.svg" alt="类别"></div></template>
+<!--            <template #item-icon><div ><img src="@/assets/img/tabbar/category.svg" alt="类别"></div></template>-->
+            <template #item-icon><div><img src="@/asstes/img/tabbar/category.svg"
+                                           alt="@/asstes/img/tabbar/category.svg"></div></template>
+<!--            <template #item-icon_active ><div><img src="@/assets/img/tabbar/category_active.svg" alt="类别"></div></template>-->
+            <template #item-icon_active><div><img src="@/assets/img/tabbar/category_active.svg" alt="@/assets/img/tabbar/category_active.svg"></div></template>
             <template #item-text><div>类别</div></template>
         </tab-bar-item>
         <tab-bar-item path="/cart" activeColor="red" class="tab-bar-item">
@@ -20,8 +23,7 @@
             <template #item-icon_active ><div><img src="@/assets/img/tabbar/mine_active.svg" alt="我的"></div></template>
             <template #item-text><div>我的</div></template>
         </tab-bar-item>
-<!--        <div class="filing"><a href="https://beian.miit.gov.cn/">豫ICP备2022018477号</a></div>-->
-    </tab-bar>
+     </tab-bar>
 </template>
 
 <script>
@@ -54,8 +56,9 @@
      /*    图片下面会有三个像素的富裕空间，可以设置下面的属性让其去除这三个像素的空间,让问题和图片更加的紧凑*/
      vertical-align: middle;
  }
- /*.filing {*/
- /*    line-height: 49px;*/
- /*   color: #000;*/
- /*}*/
+ .filing {
+     /*width: 49px;*/
+     line-height: 49px;
+    color: #000;
+ }
 </style>
