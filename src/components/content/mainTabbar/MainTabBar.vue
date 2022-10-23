@@ -6,11 +6,8 @@
             <template #item-text ><div >主页</div></template>
         </tab-bar-item>
         <tab-bar-item path="/category" activeColor="red" class="tab-bar-item">
-<!--            <template #item-icon><div ><img src="@/assets/img/tabbar/category.svg" alt="类别"></div></template>-->
-            <template #item-icon><div><img src="@/asstes/img/tabbar/category.svg"
-                                           alt="@/asstes/img/tabbar/category.svg"></div></template>
-<!--            <template #item-icon_active ><div><img src="@/assets/img/tabbar/category_active.svg" alt="类别"></div></template>-->
-            <template #item-icon_active><div><img src="@/assets/img/tabbar/category_active.svg" alt="@/assets/img/tabbar/category_active.svg"></div></template>
+            <template #item-icon><div ><img src="@/assets/img/tabbar/category.svg" alt="类别"></div></template>
+            <template #item-icon_active ><div><img src="@/assets/img/tabbar/category_active.svg" alt="类别"></div></template>
             <template #item-text><div>类别</div></template>
         </tab-bar-item>
         <tab-bar-item path="/cart" activeColor="red" class="tab-bar-item">

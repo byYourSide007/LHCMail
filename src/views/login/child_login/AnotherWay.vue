@@ -51,9 +51,10 @@
 
 <style scoped>
     .another_way {
-        position: relative;
+        /*position: absolute;*/
+        /*无论设置绝对定位还是相对定位都会导致撑大容器*/
     }
-     >>> .tab-bar-item{
+      .tab-bar-item{
         /*padding-top: 50px;*/
         /*margin-top: 50px;*/
          height: 0;
@@ -63,7 +64,7 @@
     }
     .tab-bar-item img{
         /*padding: 50px 20px 50px;*/
-        padding-top: 50px;
+        /*padding-top: 50px;*/
         width: 40px;
         /*height: 50px;*/
     }
